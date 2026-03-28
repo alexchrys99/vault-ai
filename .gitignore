@@ -1,0 +1,13 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Databases & Vaults (NEVER UPLOAD THESE)
+chroma_db/
+temp_uploads/
+*.db
+users.db
+
+# OS Files
+.DS_Store

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    image: vault-ai-base  # <-- We name the completed image
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - ./users.db:/app/users.db
+      - ./temp_uploads:/app/temp_uploads
+
+  web:
+    image: vault-ai-base  # <-- Web just re-uses the exact same image API just built!
+    command: streamlit run app.py --server.address=0.0.0.0 --server.port=8501
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
